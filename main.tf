@@ -87,11 +87,7 @@ provider "azurerm" {
   tenant_id       = "648b628e-c17f-4d43-8193-72e3f4d7499d"
   subscription_id = "24143a81-fcba-4b21-9b28-c910b75e6580"
 }*/
-resource "azurerm_resource_group" "appgrp" {
-  name     = "rg-dev-app-001"
-  location = "North Europe"
-}
 resource "azurerm_resource_group" "appgrp1" {
-  name     = "rg-dev-app-002"
+  name     = "rg-dev-app-003"
   location = "North Europe"
 }
