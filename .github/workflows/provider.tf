@@ -1,17 +1,13 @@
-# provider.tf
-
-provider "azurerm" {
-  features = {}
-}
-
-# Set the Azure Provider source and version being used
 terraform {
-  required_version = ">= 0.14"
-
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.1.0"
+      source = "hashicorp/azurerm"
+      version = "4.26.0"
     }
   }
 }
+
+provider "azurerm" {
+  features {}
+}  
+
