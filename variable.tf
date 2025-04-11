@@ -16,5 +16,5 @@ variable "tenant_id" {
 
 variable "subscription_id" {
   type=string
-  description = "This defines the name of the Azure Subscription ID"
+  description = "This defines the name of the Azure Subscription IDs"
 }
