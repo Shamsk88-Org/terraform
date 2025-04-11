@@ -24,9 +24,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
            
     - name: Terraform Init
-      with:
-        tf_actions_working_dir: "./terraform"
-        run: terraform init
+      run: terraform init
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
