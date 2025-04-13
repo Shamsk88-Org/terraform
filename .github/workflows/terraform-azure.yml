@@ -32,6 +32,9 @@ jobs:
          echo "Directory does not exist."
          exit 1
         fi
+        
+    - name: List contents of /home/runner
+      run: ls -la /home/runner
 
     - name: Terraform Init
       run: terraform init -reconfigure
