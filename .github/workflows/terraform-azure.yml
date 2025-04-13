@@ -26,22 +26,12 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     - name: List contents of /home/runner
-      run: ls -la /home/runner
-      
-    - name: Check if directory exists
-      run: |
-        if [ -d "/home/runner/work/terraform/terraform/./terraform" ]; then
-         echo "Directory exists."
-        else
-         echo "Directory does not exist."
-         exit 1
-        fi
-        
+      run: ls -la /home/runner   
 
 
     - name: Terraform Init
       run: terraform init -reconfigure
-      working-directory: "./terraform"
+      working-directory: "/home/runner/work/terraform/terraform"
     - name: Terraform Plan
       run: terraform plan -out=tfplan
     - name: Terraform Apply
