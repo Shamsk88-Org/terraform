@@ -31,7 +31,7 @@ jobs:
 
     - name: Terraform Init
       run: terraform init -reconfigure
-      working-directory: "/home/runner/work/terraform/terraform"
+      working-directory: "/home/runner/work/_temp/f1a90876-3468-4d1f-81d3-3f87adcfc601/"
     - name: Terraform Plan
       run: terraform plan -out=tfplan
     - name: Terraform Apply
