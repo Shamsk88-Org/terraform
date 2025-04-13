@@ -11,7 +11,6 @@ jobs:
     defaults:
       run:
         shell: bash
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -25,6 +24,15 @@ jobs:
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Check if directory exists
+      run: |
+        if [ -d "/home/runner/work/terraform/terraform/./terraform" ]; then
+         echo "Directory exists."
+        else
+         echo "Directory does not exist."
+         exit 1
+        fi
+
     - name: Terraform Init
       run: terraform init -reconfigure
       working-directory: "./terraform"
