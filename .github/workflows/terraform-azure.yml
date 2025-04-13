@@ -27,7 +27,13 @@ jobs:
         
     - name: List contents of /home/runner
       run: ls -la /home/runner  
-
+      
+    - name: List contents of working directory
+      run: ls -la /home/runner/work/terraform/terraform/./terraform
+      
+    - name: Check backend configuration
+      run: cat /home/runner/work/terraform/terraform/./terraform/main.tf
+      
     - name: Authenticate Azure
       run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
