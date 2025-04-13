@@ -14,7 +14,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
+    - name: Create directory
+      run: mkdir -p /home/runner/work/terraform/terraform/terraform
+      
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -29,7 +32,7 @@ jobs:
       run: ls -la /home/runner  
       
     - name: List contents of working directory
-      run: ls -la /home/runner/work/terraform/terraform/./terraform
+      run: ls -la /home/runner/work/terraform/terraform/.git/
       
     - name: Check backend configuration
       run: cat /home/runner/work/terraform/terraform/./terraform/main.tf
