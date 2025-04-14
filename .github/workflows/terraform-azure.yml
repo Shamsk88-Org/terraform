@@ -8,15 +8,27 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    env:
+        ARM_USE_MSI: true 
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+   
     defaults:
-      run:
-        shell: bash
+        run:
+            shell: bash
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    - name: Create directory
-      run: mkdir -p /home/runner/work/terraform/terraform/terraform
+
+    - name: Print working directory
+      run: pwd
+
+    - name: List files
+      run: ls -la
+
+    - name: Print GITHUB_WORKSPACE
+      run: echo $GITHUB_WORKSPACE
       
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
@@ -27,24 +39,16 @@ jobs:
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: List contents of /home/runner
-      run: ls -la /home/runner  
-      
-    - name: List contents of working directory
-      run: ls -la /home/runner/work/terraform/terraform/.git/
-      
-    - name: Check backend configuration
-      run: cat /home/runner/work/terraform/terraform/./terraform/main.tf
-      
-    - name: Authenticate Azure
-      run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-
-    - name: Terraform init
+           
+    - name: Terraform Init
       run: terraform init
+      working-directory: /home/runner/work/terraform/terraform
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
+      working-directory: /home/runner/work/terraform1/terraform1/terraform
+
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
       run: terraform apply -auto-approve tfplan
+      working-directory: /home/runner/work/terraform1/terraform1/terraform
