@@ -39,7 +39,11 @@ jobs:
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-           
+
+    - name: Terraform Format files
+      run: terraform fmt
+      working-directory: /home/runner/work/terraform/terraform
+      
     - name: Terraform Init
       run: terraform init
       working-directory: /home/runner/work/terraform/terraform
